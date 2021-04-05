@@ -1,22 +1,30 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request
+from flask.json import jsonify
+from flask_restful import Api, Resource
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///local.db'
+api = Api(app)
 
 
+# v1 - just an endpoint
 @app.route("/sauce_logs")
 def index():
     return "Sauce Logs - Logging your hot sauces"
 
-# keeping data in memory, aka The Very Bad, No Good Idea
 entries = []
 
-# v2 - create POST (add entry) and GET (list all entries) endpoints
-@app.route("/entry", methods=['POST'])
-def add_log():
-    entry = request.form
-    entries.append(entry)
-    return jsonify({'added new sauce log': 'ok'})
+class EntriesResource(Resource):
+    def get(self):
+        return jsonify({"entries": entries})
 
-@app.route("/entries", methods=['GET'])
-def get_log():
-    return jsonify({"entries": entries})
+
+class EntryResource(Resource):
+    def post(self):
+        entry = request.form
+        entries.append(entry)
+        return jsonify({"added new sauce log", "ok"})
+
+
+api.add_resource(EntriesResource, '/entries')
+api.add_resource(EntryResource, '/entry')
