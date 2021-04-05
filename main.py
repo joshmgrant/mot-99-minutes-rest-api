@@ -5,10 +5,9 @@ from flask_restful import Api, Resource
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///local.db'
-db = SQLAlchemy(app)
-ma = Marshmallow(app)
 api = Api(app)
 
+entries = []
 
 # v1 - just an endpoint
 @app.route("/sauce_logs")
@@ -51,44 +50,22 @@ def index():
 
 class EntriesResource(Resource):
     def get(self):
-        posts = Entry.query.all()
-        return entries_schema.dump(posts)
-
-    def post(self):
-        new_post = Entry(
-            title = request.json['title'],
-            description = request.json['description'],
-            heat_level = request.json['heat_level']
-        )
-        db.session.add(new_post)
-        db.session.commit()
-        return entry_schema.dump(new_post)
-
+        return entries
 
 class EntryResource(Resource):
-    def get(self, post_id):
-        post = Entry.query.get_or_404(post_id)
-        return entry_schema.dump(post)
+    def get(self, entry_id):
+        try:
+            return entries[entry_id]
+        except ValueError:
+            return 'Invalid entry index', 400
 
-    def patch(self, post_id):
-        post = Entry.query.get_or_404(post_id)
-
-        if 'title' in request.json:
-            post.title = request.json['title']
-        if 'description' in request.json:
-            post.description = request.json['description']
-        if 'heat_level' in request.json:
-            post.heat_level = request.json['heat_level']
-
-        db.session.commit()
-        return entry_schema.dump(post)
-
-    def delete(self, post_id):
-        post = Entry.query.get_or_404(post_id)
-        db.session.delete(post)
-        db.session.commit()
-        return '', 204
-
+    def post(self):
+        new_entry = {}
+        new_entry['title'] = request.json['title']
+        new_entry['description'] = request.json['description']
+        new_entry['heat_level'] = request.json['heat_level']
+        entries.append(new_entry)
+        return 'added new sauce log entry', 200
 
 api.add_resource(EntriesResource, '/entries')
 api.add_resource(EntryResource, '/entry/<int:post_id>')
