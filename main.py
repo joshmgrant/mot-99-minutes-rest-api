@@ -75,3 +75,6 @@ class EntryResource(Resource):
 
 api.add_resource(EntriesResource, '/entries')
 api.add_resource(EntryResource, '/entry/<int:post_id>')
+
+# to run using gunicorn, run
+# guicorn --bind 0.0.0.0:5000 main:app
