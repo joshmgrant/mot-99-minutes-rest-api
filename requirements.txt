@@ -3,3 +3,5 @@ flask-sqlalchemy
 flask_marshmallow
 flask_restful
 gunicorn
+pytest
+requests
