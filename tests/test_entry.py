@@ -1,13 +1,9 @@
-import requests
-import json
-
-
-def test_entry_get():
-    response = requests.get("http://localhost:5000/entry/1")
+def test_entry_get(saucelog):
+    response = saucelog.get("/entry/1")
 
     assert response.status_code == 200
 
-def test_entry_patch():
+def test_entry_patch(saucelog):
 
     example_post = {
         "title": "Habenero Sizzle",
@@ -21,31 +17,23 @@ def test_entry_patch():
         "heat_level": "hot"
     }
 
-    headers = {
-        "Content-Type": "application/json"
-    }
-
-    post_response = requests.post("http://localhost:5000/entries", headers=headers, data=json.dumps(example_post))
+    post_response = saucelog.post("/entries", data=example_post)
 
     post_id = post_response.json()['id']
-    response = requests.patch("http://localhost:5000/entry/{}".format(post_id), headers=headers, data=json.dumps(example_patch))
+    response = saucelog.patch("/entry/{}".format(post_id), data=example_patch)
 
     assert response.status_code == 200
 
-def test_entry_delete():
+def test_entry_delete(saucelog):
     example_post = {
         "title": "Thai Chili Express",
         "description": "Basil and Thai flavoured sauce",
         "heat_level": "medium"
     }
 
-    headers = {
-        "Content-Type": "application/json"
-    }
-
-    post_response = requests.post("http://localhost:5000/entries", headers=headers, data=json.dumps(example_post))
+    post_response = saucelog.post("/entries", data=example_post)
 
     post_id = post_response.json()['id']
-    response = requests.delete("http://localhost:5000/entry/{}".format(post_id), headers=headers)
+    response = saucelog.delete("/entry/{}".format(post_id))
 
     assert response.status_code == 204
