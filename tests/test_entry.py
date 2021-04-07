@@ -1,7 +1,7 @@
 def test_entry_get(saucelog):
-    response = saucelog.get("/entry/1")
+    response = (saucelog.get("/entry/1"))
 
-    assert response.status_code == 200
+    assert response.status_code_is(200)
 
 def test_entry_patch(saucelog):
 
@@ -19,10 +19,10 @@ def test_entry_patch(saucelog):
 
     post_response = saucelog.post("/entries", data=example_post)
 
-    post_id = post_response.json()['id']
+    post_id = post_response['id']
     response = saucelog.patch("/entry/{}".format(post_id), data=example_patch)
 
-    assert response.status_code == 200
+    assert response.status_code_is(200)
 
 def test_entry_delete(saucelog):
     example_post = {
@@ -33,7 +33,7 @@ def test_entry_delete(saucelog):
 
     post_response = saucelog.post("/entries", data=example_post)
 
-    post_id = post_response.json()['id']
+    post_id = post_response['id']
     response = saucelog.delete("/entry/{}".format(post_id))
 
-    assert response.status_code == 204
+    assert response.status_code_is(204)
