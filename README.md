@@ -67,13 +67,14 @@ You should be ready to go!
 
 ## Starting the Flask App
 
-If you like skipping ahead, you can start the app running
+If you like skipping ahead, you can initialize the database and start the app by running the following commands (note the order, which is important):
 
 ```
+python create_db.py
 gunicorn --bind 0.0.0.0:5000 main:app
 ```
 
-which will start the app locally at `http://localhost:5000`. You can check that this is up and running by executing
+This will start the app locally at `http://localhost:5000`. You can check that this is up and running by executing
 
 ```
 http://localhost:5000/sauce_logs
