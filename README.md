@@ -11,7 +11,7 @@ The workshop shall walk through the API app and test framework.
 
 ## Before You Start
 
-This is a Python project, so you will need Python 3.7+ installed on your machine. A good IDE such as PyCharm or VS Code is recommeded.
+This is a Python project, so you will need Python 3.7+ installed on your machine. An IDE such as PyCharm or VS Code is recommended.
 
 ## The Layout of the Workshop
 
@@ -36,22 +36,20 @@ Please clone this repo since there are some tags that are used for the workshop.
 To install the product, first create a Python [virtual environment](https://realpython.com/python-virtual-environments-a-primer/) by running this in the directory you just cloned:
 
 ```
-python -m venv venv
+python3 -m venv venv
 ```
 
-then activate the virtual environment with
+then activate the virtual environment. If you are using Mac/Linux, use the following command to active your Virtual Environment:
 
 ```
 source venv/bin/activate 
 ```
 
-on Mac/Linux, or
+If you are using Windows, use the following command to active your Virtual Environment:
 
 ```
 .\venv\bin\Activate.psl
 ```
-
-on Windows 10.
 
 Your terminal should have `(venv)` at the start of it once the virtual environment is activated. You can also use PyCharm to handle virtual environments. 
 
@@ -71,16 +69,24 @@ If you like skipping ahead, you can initialize the database and start the app by
 
 ```
 python create_db.py
-gunicorn --bind 0.0.0.0:5000 main:app
+gunicorn --bind 0.0.0.0:5000 main:app &
 ```
 
-This will start the app locally at `http://localhost:5000`. You can check that this is up and running by executing
+This will start the app locally on port 5000. You can check that this is up and running by executing
+
+```
+curl http://localhost:5000/sauce_logs
+```
+
+in a terminal window or pasting
 
 ```
 http://localhost:5000/sauce_logs
 ```
 
-in a browser window or using curl. You should see a nice welcome message. 
+in a browser window such as Chrome or Firefox.
+
+In either case, you should see a nice welcome message. 
 
 ## Running the API Tests
 
