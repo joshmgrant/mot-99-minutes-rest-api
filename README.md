@@ -86,6 +86,12 @@ http://localhost:5000/sauce_logs
 
 in a browser window such as Chrome or Firefox.
 
+If you are unable to use `gunicorn` because you are on Windows or another platform not supported by it, you can also use the Flask development server by running:
+
+```
+FLASK_APP=main.py flask run
+```
+
 In either case, you should see a nice welcome message. 
 
 ## Running the API Tests
