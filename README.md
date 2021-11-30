@@ -1,6 +1,6 @@
-# SauceCon 2021 Workshop - Build an API and API Testing Framework from Scratch in 120 Minutes
+# Ministry of Testing 99 Minute Workshop - Build an API and API Testing Framework from Scratch in 120 Minutes
 
-Hello! If you are reading this you likely are interested in or attending my [SauceCon 2021 Workshop](https://saucecon.com/workshops/) called "Build an API and API Testing Framework from Scratch in 120 Minutes". This is part of the workshop "API Testing and Monitoring". If you are not attending my workshop or not interested in API building and testing, then I hope you enjoy this repository nonetheless. 
+Hello! If you are reading this you likely are interested in or attending my Ministry of Testing Workshop called "Build an API and API Testing Framework from Scratch in 120 Minutes". This is part of the workshop "API Testing and Monitoring". If you are not attending my workshop or not interested in API building and testing, then I hope you enjoy this repository nonetheless. 
 
 The structure of this repository contains
 
